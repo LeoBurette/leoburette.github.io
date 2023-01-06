@@ -1,10 +1,13 @@
 <style>
     html{
         height: 100vh;
+        left: 0;
     }
     /* --- Title --- */
     body {
         font-family: system-ui, sans-serif;
+        overflow: hidden;
+        margin: 0;
     }
 
     h1 {
@@ -125,7 +128,6 @@
     }
     
     .container {  
-        height: 100vh;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 0.1fr 0.9fr;
@@ -134,15 +136,16 @@
         grid-template-areas:
         "Titre"
         "carousel";
+        pointer-events: none; 
     }
 
-    .Photo { 
+    #Photo { 
         grid-area: Photo; 
         display: flex;
         align-items: center;
     }
 
-    .Parcours {}
+    #Parcours {}
 
     .Projet {}
 
@@ -154,12 +157,13 @@
         align-items: center;
         justify-content: center;
         flex-flow: column;
+        pointer-events: auto; 
     }
 
     /* --- photo --- */
     .pp{
         width: 33vh;
-        border: 5px solid rgb(227, 234, 146);
+        border: 5px solid tomato;
     }
 
     /* --- carousel --- */
@@ -170,7 +174,10 @@
         grid-template-columns: 1fr 30px 30px 30px 30px 30px 1fr;
         align-items: center;
         justify-items: center;
-        /* overflow: hidden; */
+    }
+
+    .carousel input{
+        pointer-events: auto;
     }
       
     main#carouselContent {
@@ -183,7 +190,7 @@
         justify-content: center;
         overflow: hidden;
         transform-style: preserve-3d;
-        perspective: 600px;
+        perspective: 60vw;
         --items: 5;
         --middle: 3;
         --position: 1;
@@ -192,75 +199,73 @@
       
     div.item {
         position: absolute;
-        width: 300px;
+        width: 60vw;
         height: 50vh;
-        background-color: coral;
         --r: calc(var(--position) - var(--offset));
         --abs: max(calc(var(--r) * -1), var(--r));
         transition: all 0.25s linear;
         transform: rotateY(calc(-10deg * var(--r)))
-          translateX(calc(-300px * var(--r)));
+          translateX(calc(-60vw * var(--r)));
         z-index: calc((var(--position) - var(--abs)));
+        pointer-events: auto; 
+        padding: 10px;
+        border: 1px solid tomato;
+        background-color: white;
     }
       
     div.item:nth-of-type(1) {
         --offset: 1;
-        background-color: #90f1ef;
     }
     div.item:nth-of-type(2) {
         --offset: 2;
-        background-color: #ff70a6;
     }
     div.item:nth-of-type(3) {
         --offset: 3;
-        background-color: #ff9770;
     }
     div.item:nth-of-type(4) {
         --offset: 4;
-        background-color: #ffd670;
     }
     div.item:nth-of-type(5) {
         --offset: 5;
-        background-color: #e9ff70;
     }
       
-    input:nth-of-type(1) {
+    .navInput:nth-of-type(1) {
         grid-column: 2 / 3;
         grid-row: 2 / 3;
     }
-    input:nth-of-type(1):checked ~ main#carouselContent {
+    .navInput:nth-of-type(1):checked ~ main#carouselContent {
         --position: 1;
     }
       
-    input:nth-of-type(2) {
+    .navInput:nth-of-type(2) {
         grid-column: 3 / 4;
         grid-row: 2 / 3;
     }
-    input:nth-of-type(2):checked ~ main#carouselContent {
+    .navInput:nth-of-type(2):checked ~ main#carouselContent {
         --position: 2;
     }
       
-    input:nth-of-type(3) {
+    .navInput:nth-of-type(3) {
         grid-column: 4 /5;
         grid-row: 2 / 3;
     }
-    input:nth-of-type(3):checked ~ main#carouselContent {
+    .navInput:nth-of-type(3):checked ~ main#carouselContent {
         --position: 3;
     }
       
-    input:nth-of-type(4) {
+    .navInput:nth-of-type(4) {
         grid-column: 5 / 6;
         grid-row: 2 / 3;
     }
-    input:nth-of-type(4):checked ~ main#carouselContent {
+    .navInput:nth-of-type(4):checked ~ main#carouselContent {
         --position: 4;
     }
       
-    input:nth-of-type(5) {
+    .navInput:nth-of-type(5) {
         grid-column: 6 / 7;
         grid-row: 2 / 3;
     }
-    input:nth-of-type(5):checked ~ main#carouselContent {
+    .navInput:nth-of-type(5):checked ~ main#carouselContent {
         --position: 5;
     } 
 </style>
@@ -276,60 +281,74 @@
             </p>
         </div>
         <div class="carousel">
-            <input type="radio" name="position" checked />
-            <input type="radio" name="position" />
-            <input type="radio" name="position" />
-            <input type="radio" name="position" />
-            <input type="radio" name="position" />
+            <input class="navInput" type="radio" name="position" onclick="checkBox()" checked/>
+            <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
+            <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
+            <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
+            <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
             <main id="carouselContent">
-                <div class="item"></div>
-                <div class="item"></div>
-                <div class="item"></div>
+                <div id="Photo" class="item" onclick="console.log('Hello')">
+                    <img src="./static/pp.jpg" class="pp">
+                </div>
+                <div id="Parcours" class="item">
+                    <h2>My school cursus</h2>
+                    <ul>
+                        <li>Computer science engineer - Software architecture speciality</li>
+                        <li>Master of Science in Technology</li>
+                    </ul>
+                </div>
+                <div id="Projects" class="item">
+                    <h2>My Projects</h2>
+                    <ul>
+                        <li>Lot of school projects</li>
+                        <ul>
+                            <li>DSL to create a dynamic website</li>
+                            <li>Micro-service backend with a Kafka</li>
+                            <li>Final state machine to simulate a coffee machine</li>
+                            <li>Many more...</li>
+                        </ul>
+                        <li>Personal project :</li>
+                        <ul>
+                            <li>
+                                Django web-site for a landscaper
+                            </li>
+                            <li>
+                                <a href="https://github.com/LeoBurette/lispInC">
+                                    Custom lisp language in C
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/LeoBurette/modelGenerator">
+                                    DSL to create class in multiple language with one definition
+                                </a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
                 <div class="item"></div>
                 <div class="item"></div>
             <div>
         </div>
-        <!-- <div class="Photo">
-            <img src="./static/pp.jpg" class="pp">
-        </div>
-        <div class="Parcours">
-            <h2>My school cursus</h2>
-            <ul>
-                <li>Computer science engineer - Software architecture speciality</li>
-                <li>Master of Science in Technology</li>
-            </ul>
-        </div>
-        <div class="Projet">
-            <h2>My Projects</h2>
-            <ul>
-                <li>Lot of school projects</li>
-                <ul>
-                    <li>DSL to create a dynamic website</li>
-                    <li>Micro-service backend with a Kafka</li>
-                    <li>Final state machine to simulate a coffee machine</li>
-                    <li>Many more...</li>
-                </ul>
-                <li>Personal project :</li>
-                <ul>
-                    <li>
-                        Django web-site for a landscaper
-                    </li>
-                    <li>
-                        <a href="https://github.com/LeoBurette/lispInC">
-                            Custom lisp language in C
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/LeoBurette/modelGenerator">
-                            DSL to create class in multiple language with one definition
-                        </a>
-                    </li>
-                </ul>
-            </ul>
-        </div>
-        <div class="Actuellement"></div> -->
     </div>
 </body>
 <script>
-
+    function checkBox(){
+        let i = 0
+        let items = document.getElementsByClassName("item")
+        
+        for(let elem of document.getElementsByClassName("navInput")){
+            if(elem.checked){
+                items[i].style.backgroundColor = "white"
+                items[i].onclick = function (event) {checkBox()}
+            }else{
+                items[i].style.backgroundColor = "rgb(173, 173, 173)"
+                items[i].onclick = function (event) {
+                    elem.checked = true
+                    checkBox()
+                }
+            }
+            i++
+        }
+    }
+    checkBox()
 </script>
