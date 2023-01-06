@@ -1,7 +1,335 @@
-<!DOCTYPE html>
-<html>
-    <body>
-        <h1>HELLO</h1>
-        <p>It's a test</p>
-    </body>
-</html>
+<style>
+    html{
+        height: 100vh;
+    }
+    /* --- Title --- */
+    body {
+        font-family: system-ui, sans-serif;
+    }
+
+    h1 {
+        /* font-size: calc( 1em + 30vmin ); */
+        font-weight: 900;
+        color: tomato;
+        
+        --x-offset: -0.0625em;
+        --y-offset: 0.0625em;
+        --stroke: 0.025em;
+        --background-color: white;
+        --stroke-color: lightblue;
+        
+        text-shadow: 
+            var(--x-offset)
+            var(--y-offset)
+            0px
+            var(--background-color), 
+            
+            calc( var(--x-offset) - var(--stroke) )
+            calc( var(--y-offset) + var(--stroke) )
+            0px
+            var(--stroke-color);
+        
+    }
+
+    h2 {
+        /* font-size: calc( 1em + 30vmin ); */
+        font-weight: 900;
+        color: tomato;
+        
+        --x-offset: -0.0625em;
+        --y-offset: 0.0625em;
+        --stroke: 0.025em;
+        --background-color: white;
+        --stroke-color: lightblue;
+        
+        text-shadow: 
+            var(--x-offset)
+            var(--y-offset)
+            0px
+            var(--background-color), 
+            
+            calc( var(--x-offset) - var(--stroke) )
+            calc( var(--y-offset) + var(--stroke) )
+            0px
+            var(--stroke-color);
+        
+    }
+    /* for browsers that support spread, added in
+    https://drafts.csswg.org/css-text-decor-4/#text-shadow-property
+    currently: none browsers! none of them!
+    I can't even find a test: 
+    https://wpt.fyi/results/css/css-text-decor */
+    @supports ( text-shadow: 1px 1px 1px 1px black ) {
+        h1 {
+            text-shadow:
+            
+            var(--x-offset)
+            var(--y-offset)
+            0px
+            0px
+            var(--background-color), 
+            
+            var(--x-offset) 
+            var(--y-offset)
+            var(--stroke)
+            0px
+            var(--stroke-color);
+            
+        }
+    }
+
+    /* --- Hover --- */
+    .hover-2 {
+        --c: tomato; /* the color */
+        --b: .1em;    /* border length*/
+        --d: 20px;    /* the cube depth */
+        
+        --_s: calc(var(--d) + var(--b));
+        
+        color: var(--c);
+        border: solid #0000;
+        border-width: var(--b) var(--b) var(--_s) var(--_s);
+        background:
+            conic-gradient(at left var(--d)  bottom var(--d),
+            #0000 90deg, rgb(255 255 255 /0.3) 0 225deg,rgb(255 255 255 /0.6) 0) border-box,
+            conic-gradient(at left var(--_s) bottom var(--_s),
+            #0000 90deg,var(--c) 0) 0 100%/calc(100% - var(--b)) calc(100% - var(--b))  border-box;
+        transform: translate(calc(var(--d)/-1),var(--d));
+        clip-path: 
+            polygon(
+            var(--d) 0%, 
+            var(--d) 0%, 
+            100% 0%, 
+            100% calc(100% - var(--d)),
+            100% calc(100% - var(--d)),
+            var(--d) calc(100% - var(--d))
+            );
+        transition: 0.5s;
+        }
+        .hover-2:hover {
+        transform: translate(0,0);
+        clip-path: 
+            polygon(
+            0% var(--d), 
+            var(--d) 0%, 
+            100% 0%, 
+            100% calc(100% - var(--d)), 
+            calc(100% - var(--d)) 100%, 
+            0% 100%
+        );
+        }
+
+    /* --- Grid --- */
+    div{
+        font-family: system-ui, sans-serif;
+    }
+    
+    .container {  
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 0.9fr;
+        gap: 0px 0px;
+        grid-auto-flow: row;
+        grid-template-areas:
+        "Titre"
+        "carousel";
+    }
+
+    .Photo { 
+        grid-area: Photo; 
+        display: flex;
+        align-items: center;
+    }
+
+    .Parcours {}
+
+    .Projet {}
+
+    .Actuellement {}
+
+    .Titre { 
+        grid-area: Titre; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: column;
+    }
+
+    /* --- photo --- */
+    .pp{
+        width: 33vh;
+        border: 5px solid rgb(227, 234, 146);
+    }
+
+    /* --- carousel --- */
+    .carousel {
+        margin: 0;
+        display: grid;
+        grid-template-rows: 70vh 1vh;
+        grid-template-columns: 1fr 30px 30px 30px 30px 30px 1fr;
+        align-items: center;
+        justify-items: center;
+        /* overflow: hidden; */
+    }
+      
+    main#carouselContent {
+        grid-row: 1 / 2;
+        grid-column: 1 / 8;
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        perspective: 600px;
+        --items: 5;
+        --middle: 3;
+        --position: 1;
+        pointer-events: none;
+    }
+      
+    div.item {
+        position: absolute;
+        width: 300px;
+        height: 50vh;
+        background-color: coral;
+        --r: calc(var(--position) - var(--offset));
+        --abs: max(calc(var(--r) * -1), var(--r));
+        transition: all 0.25s linear;
+        transform: rotateY(calc(-10deg * var(--r)))
+          translateX(calc(-300px * var(--r)));
+        z-index: calc((var(--position) - var(--abs)));
+    }
+      
+    div.item:nth-of-type(1) {
+        --offset: 1;
+        background-color: #90f1ef;
+    }
+    div.item:nth-of-type(2) {
+        --offset: 2;
+        background-color: #ff70a6;
+    }
+    div.item:nth-of-type(3) {
+        --offset: 3;
+        background-color: #ff9770;
+    }
+    div.item:nth-of-type(4) {
+        --offset: 4;
+        background-color: #ffd670;
+    }
+    div.item:nth-of-type(5) {
+        --offset: 5;
+        background-color: #e9ff70;
+    }
+      
+    input:nth-of-type(1) {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    input:nth-of-type(1):checked ~ main#carouselContent {
+        --position: 1;
+    }
+      
+    input:nth-of-type(2) {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+    }
+    input:nth-of-type(2):checked ~ main#carouselContent {
+        --position: 2;
+    }
+      
+    input:nth-of-type(3) {
+        grid-column: 4 /5;
+        grid-row: 2 / 3;
+    }
+    input:nth-of-type(3):checked ~ main#carouselContent {
+        --position: 3;
+    }
+      
+    input:nth-of-type(4) {
+        grid-column: 5 / 6;
+        grid-row: 2 / 3;
+    }
+    input:nth-of-type(4):checked ~ main#carouselContent {
+        --position: 4;
+    }
+      
+    input:nth-of-type(5) {
+        grid-column: 6 / 7;
+        grid-row: 2 / 3;
+    }
+    input:nth-of-type(5):checked ~ main#carouselContent {
+        --position: 5;
+    } 
+</style>
+<head>
+    <title>Leo BURETTE</title>
+</head>
+<body>
+    <div class="container">
+        <div class="Titre">
+            <h1 class="hover-2">Leo BURETTE</h1>
+            <p>
+                Software engineer / Architect in QuantifiCare Team
+            </p>
+        </div>
+        <div class="carousel">
+            <input type="radio" name="position" checked />
+            <input type="radio" name="position" />
+            <input type="radio" name="position" />
+            <input type="radio" name="position" />
+            <input type="radio" name="position" />
+            <main id="carouselContent">
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+                <div class="item"></div>
+            <div>
+        </div>
+        <!-- <div class="Photo">
+            <img src="./static/pp.jpg" class="pp">
+        </div>
+        <div class="Parcours">
+            <h2>My school cursus</h2>
+            <ul>
+                <li>Computer science engineer - Software architecture speciality</li>
+                <li>Master of Science in Technology</li>
+            </ul>
+        </div>
+        <div class="Projet">
+            <h2>My Projects</h2>
+            <ul>
+                <li>Lot of school projects</li>
+                <ul>
+                    <li>DSL to create a dynamic website</li>
+                    <li>Micro-service backend with a Kafka</li>
+                    <li>Final state machine to simulate a coffee machine</li>
+                    <li>Many more...</li>
+                </ul>
+                <li>Personal project :</li>
+                <ul>
+                    <li>
+                        Django web-site for a landscaper
+                    </li>
+                    <li>
+                        <a href="https://github.com/LeoBurette/lispInC">
+                            Custom lisp language in C
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/LeoBurette/modelGenerator">
+                            DSL to create class in multiple language with one definition
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <div class="Actuellement"></div> -->
+    </div>
+</body>
+<script>
+
+</script>
