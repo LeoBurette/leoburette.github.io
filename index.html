@@ -1,4 +1,6 @@
 <style>
+    @import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+
     html{
         height: 100vh;
         left: 0;
@@ -10,31 +12,7 @@
         margin: 0;
     }
 
-    h1 {
-        /* font-size: calc( 1em + 30vmin ); */
-        font-weight: 900;
-        color: tomato;
-        
-        --x-offset: -0.0625em;
-        --y-offset: 0.0625em;
-        --stroke: 0.025em;
-        --background-color: white;
-        --stroke-color: lightblue;
-        
-        text-shadow: 
-            var(--x-offset)
-            var(--y-offset)
-            0px
-            var(--background-color), 
-            
-            calc( var(--x-offset) - var(--stroke) )
-            calc( var(--y-offset) + var(--stroke) )
-            0px
-            var(--stroke-color);
-        
-    }
-
-    h2 {
+    h1, h2, .bigBold {
         /* font-size: calc( 1em + 30vmin ); */
         font-weight: 900;
         color: tomato;
@@ -145,12 +123,6 @@
         align-items: center;
     }
 
-    #Parcours {}
-
-    .Projet {}
-
-    .Actuellement {}
-
     .Titre { 
         grid-area: Titre; 
         display: flex;
@@ -254,7 +226,7 @@
     }
       
     .navInput:nth-of-type(4) {
-        grid-column: 5 / 6;
+        grid-column: 5 /6;
         grid-row: 2 / 3;
     }
     .navInput:nth-of-type(4):checked ~ main#carouselContent {
@@ -262,12 +234,52 @@
     }
       
     .navInput:nth-of-type(5) {
-        grid-column: 6 / 7;
+        grid-column: 6 /7;
         grid-row: 2 / 3;
     }
     .navInput:nth-of-type(5):checked ~ main#carouselContent {
         --position: 5;
-    } 
+    }
+
+    /* --- Custom Page --- */
+    #GridPhoto{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #GridPhoto #TextZone{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
+    #TextZone .LineText{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .bigBold{
+        margin-right: 5px;
+    }
+
+    #Parcours li{
+        font-family: 'Walter Turncoat', cursive;
+        list-style-type: "o ";
+    }
+
+    #Parcours ul{
+        margin-bottom: 30px;
+    }
+
+    #ParcContent{
+        border: 1px dashed;
+        display: flex;
+    }
+
+    #PolytechLogo{
+        margin-top: 40px;
+        height: 100px;
+    }
 </style>
 <head>
     <title>Leo BURETTE</title>
@@ -281,20 +293,74 @@
             </p>
         </div>
         <div class="carousel">
-            <input class="navInput" type="radio" name="position" onclick="checkBox()" checked/>
             <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
             <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
+            <input class="navInput" type="radio" name="position" onclick="checkBox()"checked/>
             <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
             <input class="navInput" type="radio" name="position" onclick="checkBox()"/>
             <main id="carouselContent">
                 <div id="Photo" class="item" onclick="console.log('Hello')">
-                    <img src="./static/pp.jpg" class="pp">
+                    <div id="GridPhoto">
+                        <img src="./static/pp.jpg" class="pp">
+                        <div id="TextZone">
+                            <h2>Presentation</h2>
+                            <div class="LineText">
+                                <p class="bigBold">Name : </p> <p>Leo Burette</p>
+                            </div>
+                            <div class="LineText">
+                                <p class="bigBold">Age : </p> <p id="age"></p>
+                            </div>
+                            <div class="LineText">
+                                <p class="bigBold">Langage : </p> <p>French, English</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div id="Parcours" class="item">
                     <h2>My school cursus</h2>
-                    <ul>
-                        <li>Computer science engineer - Software architecture speciality</li>
-                        <li>Master of Science in Technology</li>
+                    <div id="ParcContent">
+                        <div>
+                            <ul>
+                                <li>Computer science engineer - Software architecture speciality</li>
+                                <ul>
+                                    <li>Polytech Nice Sophia</li>
+                                    <li>From 2019 - 2022</li>
+                                </ul>
+                                <li>Master of Science in Technology</li>
+                                <ul>
+                                    <li>Polytech Nice Sophia</li>
+                                    <li>From 2019 - 2022</li>
+                                </ul>
+                                <li>P.E.I.P</li>
+                                <ul>
+                                    <li>Intensive two-year study course preparing the selection for the engeniring program</li>
+                                    <li>Polytech Marseille</li>
+                                    <li>From 2017-2019</li>
+                                </ul>
+                                <li>High School diploma</li>
+                                <ul>
+                                    <li>Get in 2017</li>
+                                </ul>
+                            </ul>
+                        </div>
+                        <img id="PolytechLogo" src="./static/polytech.svg">
+                    </div>
+                </div>
+                <div id="Job" class="item">
+                    <h2>Professional background</h2>
+                    <ul id="timeline">
+                        <li class="event">
+                            <h3>Software Architect - QuantifiCare</h3>
+                            <div class="time">September 2022 - Now</div>
+                        </li>
+                        <li class="event">
+                            <h3>Work-study in software architecture - QuantifiCare</h3>
+                            <div class="time">September 2021 - September 2022</div>
+                        </li>
+                        <li class="event">
+                            <h3>Internship in software architecture - QuantifiCare</h3>
+                            <div class="time">May 2021 - September 2021</div>
+                        </li>
                     </ul>
                 </div>
                 <div id="Projects" class="item">
@@ -313,20 +379,28 @@
                                 Django web-site for a landscaper
                             </li>
                             <li>
-                                <a href="https://github.com/LeoBurette/lispInC">
+                                <a class="linkInside" href="https://github.com/LeoBurette/lispInC">
                                     Custom lisp language in C
                                 </a>
                             </li>
                             <li>
-                                <a href="https://github.com/LeoBurette/modelGenerator">
+                                <a class="linkInside" href="https://github.com/LeoBurette/modelGenerator">
                                     DSL to create class in multiple language with one definition
                                 </a>
                             </li>
                         </ul>
                     </ul>
                 </div>
-                <div class="item"></div>
-                <div class="item"></div> 
+                <div id="Techno" class="item">
+                        <h2>What can I do ?</h2>
+                        <p class="bigBold">Langages :</p>
+                            <p>I have a preference for <b>Go</b>, <b>C++</b> and <b>Javascipt</b> but I can  work with every langage with a <b>imperative, object oriented or functional paradigm</b></p>
+                            <p>I already work with : C, C++, JavaScript, Java, HTML, CSS, Racket, Go, Python, SQL, Fortran, VBA and many other !</p>
+                        <p class="bigBold">Framework :</p>
+                            <p>With all this langage's, I played with a lot of framework,  <b>Django</b> is one of my favorite. The speed with which you can create a website with an admin page and everything you need will always impress me. I also played with Vue, Angular, Express, Gin, QT, Spring...</p>
+                        <p class="bigBold">Speciality :</p>
+                            <p>My specialty at polytech was software architecture and I was lucky enough to find a company (QuantifiCare) that trusted me to put my knowledge into practice.</p>                        
+                </div>
             <div>
         </div>
     </div>
@@ -339,16 +413,26 @@
         for(let elem of document.getElementsByClassName("navInput")){
             if(elem.checked){
                 items[i].style.backgroundColor = "white"
-                items[i].onclick = function (event) {checkBox()}
+                items[i].onclick = function (event) {
+                    checkBox()
+                }
+                for(let insideLink of items[i].getElementsByClassName("linkInside")){
+                    insideLink.style.pointerEvents = "auto"
+                }
             }else{
                 items[i].style.backgroundColor = "rgb(173, 173, 173)"
                 items[i].onclick = function (event) {
                     elem.checked = true
                     checkBox()
                 }
+                for(let insideLink of items[i].getElementsByClassName("linkInside")){
+                    insideLink.style.pointerEvents = "none"
+                }
             }
             i++
         }
     }
+    // Set Age
+    document.getElementById("age").innerHTML = new Date().getFullYear() - (new Date().getMonth()+1 > 6 ? 1999 : 2000)
     checkBox()
 </script>
