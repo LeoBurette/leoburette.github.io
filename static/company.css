@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+
+:root {
+    --accent: tomato;
+    --ink: #202020;
+    --muted: #666;
+    --line: #d9d9d9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #fff 0%, #fff8f5 100%);
+}
+
+.company-page {
+    width: min(920px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 32px 0 48px;
+}
+
+.back-link {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.company-header {
+    margin: 36px 0 28px;
+    padding: 28px;
+    border: 1px solid var(--accent);
+    background: white;
+    box-shadow: 12px 12px 0 rgba(255, 99, 71, 0.14);
+}
+
+.company-header h1,
+.company-section h2 {
+    margin-top: 0;
+    color: var(--accent);
+    font-weight: 900;
+    text-shadow: -0.0625em 0.0625em 0 white, -0.0875em 0.0875em 0 lightblue;
+}
+
+.company-header h1 {
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 7vw, 4rem);
+}
+
+.company-header p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.company-section {
+    margin-top: 22px;
+    padding: 24px 28px;
+    border-left: 4px solid var(--accent);
+    background: white;
+}
+
+.company-section h2 {
+    font-size: 1.7rem;
+}
+
+.company-section ul {
+    padding-left: 22px;
+}
+
+.company-section li + li {
+    margin-top: 10px;
+}
+
+.meta {
+    color: var(--muted);
+    font-family: 'Walter Turncoat', cursive;
+}
+
+@media (max-width: 600px) {
+    .company-page {
+        width: min(100% - 24px, 920px);
+        padding-top: 20px;
+    }
+
+    .company-header,
+    .company-section {
+        padding: 20px;
+    }
+}

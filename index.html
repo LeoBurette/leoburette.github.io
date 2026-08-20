@@ -2,14 +2,16 @@
     @import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
 
     html{
-        height: 100vh;
+        min-height: 100%;
         left: 0;
         user-select: none; /* Standard syntax */
     }
     /* --- Title --- */
     body {
         font-family: system-ui, sans-serif;
-        overflow: hidden;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
         margin: 0;
     }
 
@@ -107,6 +109,7 @@
     }
     
     .container {  
+        min-height: 100vh;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 0.1fr 0.9fr;
@@ -135,7 +138,13 @@
 
     /* --- photo --- */
     .pp{
-        width: 33vh;
+        width: min(33vh, 42vw);
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        display: block;
+        box-sizing: border-box;
+        flex: 0 0 auto;
         border: 5px solid tomato;
     }
 
@@ -168,6 +177,13 @@
         --middle: 3;
         --position: 1;
         pointer-events: none;
+        cursor: grab;
+        touch-action: pan-y;
+    }
+
+    main#carouselContent.is-dragging {
+        cursor: grabbing;
+        user-select: none;
     }
       
     div.item {
@@ -184,6 +200,7 @@
         padding: 10px;
         border: 1px solid tomato;
         background-color: white;
+        overflow: auto;
     }
       
     div.item:nth-of-type(1) {
@@ -257,10 +274,20 @@
     #TextZone .LineText{
         display: flex;
         flex-direction: row;
+        align-items: baseline;
+        flex-wrap: nowrap;
+        gap: 4px;
+    }
+
+    #TextZone .LineText p {
+        margin-top: 0;
+        margin-bottom: 0;
     }
 
     .bigBold{
-        margin-right: 5px;
+        margin-right: 0;
+        flex: 0 0 auto;
+        white-space: nowrap;
     }
 
     #Parcours li{
@@ -281,6 +308,96 @@
         margin-top: 40px;
         height: 100px;
     }
+
+    #Job .company-link {
+        color: tomato;
+        text-decoration: none;
+    }
+
+    #Job .company-link:hover {
+        text-decoration: underline;
+    }
+
+    #Job .company-name {
+        margin-top: 24px;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px dashed tomato;
+        color: tomato;
+        font-size: 1.05rem;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            grid-template-rows: auto auto;
+        }
+
+        .Titre {
+            padding: 20px 16px 0;
+            text-align: center;
+        }
+
+        .Titre h1 {
+            margin: 0;
+            font-size: clamp(2rem, 12vw, 3.5rem);
+        }
+
+        .Titre p {
+            margin-bottom: 0;
+        }
+
+        .carousel {
+            grid-template-rows: minmax(60vh, 1fr) 32px;
+            grid-template-columns: 1fr 30px 30px 30px 30px 30px 1fr;
+        }
+
+        main#carouselContent {
+            height: 60vh;
+            perspective: 100vw;
+        }
+
+        div.item {
+            width: calc(100vw - 34px);
+            height: calc(60vh - 34px);
+            box-sizing: border-box;
+            transform: rotateY(calc(-6deg * var(--r)))
+                translateX(calc(-92vw * var(--r)));
+        }
+
+        #GridPhoto {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #Photo {
+            align-items: flex-start;
+        }
+
+        .pp {
+            width: min(100%, 200px);
+            height: auto;
+            aspect-ratio: 1 / 1;
+            max-height: 28vh;
+            object-fit: contain;
+        }
+
+        #TextZone .LineText {
+            width: 100%;
+        }
+
+        #GridPhoto #TextZone {
+            margin: 10px 0 0;
+        }
+
+        #ParcContent {
+            flex-direction: column;
+        }
+
+        #PolytechLogo {
+            align-self: center;
+            margin: 20px 0;
+        }
+    }
 </style>
 <head>
     <meta name="google-site-verification" content="lfIrmoY3iE5NyOPU1hvfM_Ax3qKI6YGEiqqRGUtuTvs" />
@@ -291,7 +408,7 @@
         <div class="Titre">
             <h1 class="hover-2">Leo BURETTE</h1>
             <p>
-                Software engineer / Architect in QuantifiCare Team
+                Software engineer / Architect
             </p>
         </div>
         <div class="carousel">
@@ -313,7 +430,13 @@
                                 <p class="bigBold">Age : </p> <p id="age"></p>
                             </div>
                             <div class="LineText">
-                                <p class="bigBold">Langage : </p> <p>French, English</p>
+                                <p class="bigBold">Languages : </p> <p>Native French, professional English</p>
+                            </div>
+                            <div class="LineText">
+                                <p class="bigBold">Contact : </p> <p>leo.burette@gmail.com</p>
+                            </div>
+                            <div class="LineText">
+                                <p class="bigBold">Location : </p> <p>06600 Antibes, France</p>
                             </div>
                         </div>
                     </div>
@@ -323,25 +446,15 @@
                     <div id="ParcContent">
                         <div>
                             <ul>
-                                <li>Computer science engineer - Software architecture speciality</li>
+                                <li>Bachelor's Degree in Computer Science</li>
                                 <ul>
                                     <li>Polytech Nice Sophia</li>
-                                    <li>From 2019 - 2022</li>
+                                    <li>Software architecture specialization, 2019 - 2022</li>
                                 </ul>
-                                <li>Master of Science in Technology</li>
+                                <li>Engineering preparatory program</li>
                                 <ul>
-                                    <li>Polytech Nice Sophia</li>
-                                    <li>From 2019 - 2022</li>
-                                </ul>
-                                <li>P.E.I.P</li>
-                                <ul>
-                                    <li>Intensive two-year study course preparing the selection for the engeniring program</li>
                                     <li>Polytech Marseille</li>
-                                    <li>From 2017-2019</li>
-                                </ul>
-                                <li>High School diploma</li>
-                                <ul>
-                                    <li>Get in 2017</li>
+                                    <li>2019</li>
                                 </ul>
                             </ul>
                         </div>
@@ -351,17 +464,34 @@
                 <div id="Job" class="item">
                     <h2>Professional background</h2>
                     <ul id="timeline">
-                        <li class="event">
-                            <h3>Software Architect - QuantifiCare</h3>
-                            <div class="time">September 2022 - Now</div>
+                        <li class="company-name">
+                            <a class="company-link" href="companies/sii.html">SII - Airbus Defence and Space</a>
                         </li>
                         <li class="event">
-                            <h3>Work-study in software architecture - QuantifiCare</h3>
+                            <h3>Software Engineer</h3>
+                            <div class="time">Sophia Antipolis | May 2024 - Now</div>
+                        </li>
+                        <li class="company-name">
+                            <a class="company-link" href="companies/quantificare.html">QuantifiCare</a>
+                        </li>
+                        <li class="event">
+                            <h3>Software Architect</h3>
+                            <div class="time">Sophia Antipolis | September 2022 - March 2024</div>
+                        </li>
+                        <li class="event">
+                            <h3>Apprentice Software Architect</h3>
                             <div class="time">September 2021 - September 2022</div>
                         </li>
                         <li class="event">
-                            <h3>Internship in software architecture - QuantifiCare</h3>
+                            <h3>Software Development Intern</h3>
                             <div class="time">May 2021 - September 2021</div>
+                        </li>
+                        <li class="company-name">
+                            <a class="company-link" href="companies/iusti.html">IUSTI - University Institute of Industrial Thermal Systems</a>
+                        </li>
+                        <li class="event">
+                            <h3>Software Development Intern</h3>
+                            <div class="time">Marseille | June 2019 - July 2019</div>
                         </li>
                     </ul>
                 </div>
@@ -394,14 +524,17 @@
                     </ul>
                 </div>
                 <div id="Techno" class="item">
-                        <h2>What can I do ?</h2>
-                        <p class="bigBold">Langages :</p>
-                            <p>I have a preference for <b>Go</b>, <b>C++</b> and <b>Javascipt</b> but I can  work with every langage with a <b>imperative, object oriented or functional paradigm</b></p>
-                            <p>I already work with : C, C++, JavaScript, Java, HTML, CSS, Racket, Go, Python, SQL, Fortran, VBA and many other !</p>
-                        <p class="bigBold">Framework :</p>
-                            <p>With all this langage's, I played with a lot of framework,  <b>Django</b> is one of my favorite. The speed with which you can create a website with an admin page and everything you need will always impress me. I also played with Vue, Angular, Express, Gin, QT, Spring...</p>
-                        <p class="bigBold">Speciality :</p>
-                            <p>My specialty at polytech was software architecture and I was lucky enough to find a company (QuantifiCare) that trusted me to put my knowledge into practice.</p>                        
+                        <h2>Technical expertise</h2>
+                        <p class="bigBold">Languages :</p>
+                            <p>Mastery of object-oriented, functional, and imperative programming paradigms with experience in <b>C++, C, Go, Racket, JavaScript, and Java</b>.</p>
+                        <p class="bigBold">Technologies :</p>
+                            <p>Proficiency with <b>Docker, Git, Maven, Linux, Windows, and macOS</b>.</p>
+                        <p class="bigBold">Frameworks :</p>
+                            <p>Experience with <b>Node.js, Spring, Qt/QML</b>, and other software development frameworks.</p>
+                        <p class="bigBold">Soft skills :</p>
+                            <p>Adaptability, communication, organization, initiative, and professionalism.</p>
+                        <p class="bigBold">Certifications :</p>
+                            <p><b>CNAM MOOC</b> - Deep Learning; <b>ORSYS</b> - Implementing Kubernetes.</p>
                 </div>
             <div>
         </div>
@@ -434,6 +567,103 @@
             i++
         }
     }
+
+    const carouselContent = document.getElementById("carouselContent")
+    let dragStartX = null
+    let suppressClick = false
+    let wheelLocked = false
+    let wheelUnlockTimer = null
+
+    function moveToSection(direction){
+        const navigationInputs = Array.from(document.getElementsByClassName("navInput"))
+        const currentPosition = navigationInputs.findIndex(function(input){
+            return input.checked
+        })
+        const nextPosition = (currentPosition + direction + navigationInputs.length) % navigationInputs.length
+        navigationInputs[nextPosition].checked = true
+        checkBox()
+    }
+
+    function stopDragging(event){
+        if (carouselContent.hasPointerCapture(event.pointerId)) {
+            carouselContent.releasePointerCapture(event.pointerId)
+        }
+        carouselContent.classList.remove("is-dragging")
+    }
+
+    carouselContent.addEventListener("pointerdown", function(event){
+        if (event.pointerType === "mouse" && event.button !== 0) {
+            return
+        }
+        dragStartX = event.clientX
+        suppressClick = false
+        carouselContent.setPointerCapture(event.pointerId)
+        carouselContent.classList.add("is-dragging")
+    })
+
+    carouselContent.addEventListener("pointermove", function(event){
+        if (dragStartX === null) {
+            return
+        }
+
+        if (Math.abs(event.clientX - dragStartX) > 8) {
+            suppressClick = true
+        }
+    })
+
+    carouselContent.addEventListener("pointerup", function(event){
+        if (dragStartX === null) {
+            return
+        }
+
+        const dragDistance = event.clientX - dragStartX
+        stopDragging(event)
+        dragStartX = null
+
+        if (Math.abs(dragDistance) < 40) {
+            return
+        }
+
+        const direction = dragDistance < 0 ? 1 : -1
+        moveToSection(direction)
+    })
+
+    carouselContent.addEventListener("pointercancel", function(event){
+        if (dragStartX !== null) {
+            stopDragging(event)
+            dragStartX = null
+        }
+    })
+
+    carouselContent.addEventListener("click", function(event){
+        if (suppressClick) {
+            event.preventDefault()
+            event.stopPropagation()
+            suppressClick = false
+        }
+    }, true)
+
+    carouselContent.addEventListener("wheel", function(event){
+        const horizontalDistance = event.shiftKey ? event.deltaY : event.deltaX
+        const hasHorizontalIntent = event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)
+
+        if (!hasHorizontalIntent || Math.abs(horizontalDistance) < 10) {
+            return
+        }
+
+        event.preventDefault()
+        if (!wheelLocked) {
+            wheelLocked = true
+            moveToSection(horizontalDistance > 0 ? 1 : -1)
+        }
+
+        window.clearTimeout(wheelUnlockTimer)
+        wheelUnlockTimer = window.setTimeout(function(){
+            wheelLocked = false
+            wheelUnlockTimer = null
+        }, 50)
+    }, { passive: false })
+
     // Set Age
     document.getElementById("age").innerHTML = new Date().getFullYear() - (new Date().getMonth()+1 > 6 ? 1999 : 2000)
     checkBox()
