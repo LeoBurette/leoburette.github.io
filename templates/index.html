@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============================================================
+     Léo Burette — portfolio personnel
+     Maquette retenue : 01 « Éditorial clair »
+     Stack : HTML + CSS + ~60 lignes de JS. Aucune dépendance.
+     PORTRAIT : remplacer static/pp.jpg par la photo haute
+     définition (carré ou 4:5, ≥ 2000 px de côté).
+     ============================================================ -->
+
+<title>{{!meta.title.fr}}</title>
+<meta name="description" content="{{!meta.description.fr}}">
+<meta name="author" content="Léo Burette">
+<meta name="theme-color" content="#f8f6f1">
+<link rel="canonical" href="https://leoburette.github.io/">
+
+<meta property="og:type" content="profile">
+<meta property="og:title" content="{{!meta.titleShort.fr}}">
+<meta property="og:description" content="{{!meta.ogDescription.fr}}">
+<meta property="og:image" content="https://leoburette.github.io/static/pp.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary">
+
+<meta name="google-site-verification" content="lfIrmoY3iE5NyOPU1hvfM_Ax3qKI6YGEiqqRGUtuTvs">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2316130f'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' fill='%23f8f6f1' text-anchor='middle'%3ELB%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- jetons ---------- */
+  :root{
+    --paper:#f8f6f1;
+    --ink:#16130f;
+    --body:#3b3730;
+    --muted:#6f6a61;
+    --rule:#ddd7cb;
+    --accent:#a8432a;
+    --measure:66rem;
+    --ease:cubic-bezier(.2,.8,.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-weight:300;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  /* grain de papier discret */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.32;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:var(--paper)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .serif{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400}
+  .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  .skip{
+    position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);
+    padding:.7rem 1.2rem;z-index:100;font-size:13px;
+  }
+  .skip:focus{left:1rem;top:1rem}
+
+  /* ---------- barre de navigation ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:20;
+    background:rgba(248,246,241,.86);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .topbar-inner{
+    max-width:var(--measure);margin:0 auto;padding:0 2.5rem;
+    display:flex;align-items:center;justify-content:space-between;
+    height:62px;gap:2rem;
+  }
+  .brand{font-family:"Instrument Serif",Georgia,serif;font-size:19px;letter-spacing:.01em;white-space:nowrap}
+  .brand em{color:var(--accent);font-style:normal}
+  nav.main{display:flex;gap:1.9rem}
+  nav.main a{
+    font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--muted);transition:color .2s;position:relative;padding:4px 0;
+  }
+  nav.main a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--accent);transition:width .25s var(--ease);
+  }
+  nav.main a:hover,nav.main a[aria-current]{color:var(--ink)}
+  nav.main a:hover::after,nav.main a[aria-current]::after{width:100%}
+  .progress{height:2px;background:var(--accent);width:0;transform-origin:0 50%}
+
+  /* ---------- sélecteur de langue ---------- */
+  .nav-right{display:flex;align-items:center;gap:1.7rem}
+  .lang{display:flex;align-items:center;gap:.45rem}
+  .lang button{
+    background:none;border:none;padding:2px 0;cursor:pointer;
+    font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    font-size:10.5px;letter-spacing:.14em;color:#a9a29a;
+    border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+  }
+  .lang button:hover{color:var(--ink)}
+  .lang button[aria-pressed="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+  .lang .sep{color:var(--rule);font-size:10px}
+
+  /* ---------- structure ---------- */
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 2.5rem}
+  section{padding:5.5rem 0;border-bottom:1px solid var(--rule);scroll-margin-top:72px}
+  .eyebrow{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:.8rem;margin-bottom:2.4rem;
+    font-weight:400;
+  }
+  .eyebrow::after{content:"";height:1px;flex:1;background:var(--rule)}
+
+  /* ---------- bannière ---------- */
+  .hero{padding:5.5rem 0 4.5rem;border-bottom:1px solid var(--rule)}
+  .hero-grid{display:grid;grid-template-columns:1fr 300px;gap:4rem;align-items:start}
+  h1{
+    font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+    font-size:clamp(3.2rem,7vw,6.2rem);line-height:.94;letter-spacing:-.022em;
+    max-width:11ch;
+  }
+  h1 .accent{color:var(--accent)}
+  .role{
+    margin-top:1.5rem;font-size:1.24rem;line-height:1.5;color:var(--muted);
+    max-width:40ch;font-weight:300;
+  }
+  .role b{color:var(--ink);font-weight:500}
+  .portrait-fig{position:relative;margin:0;padding-top:.35rem}
+  .portrait{
+    width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;
+    filter:grayscale(1) contrast(1.04);
+    border:1px solid var(--rule);display:block;
+    transition:filter .6s var(--ease);
+    background:#e8e4da;
+  }
+  .portrait:hover{filter:grayscale(0) contrast(1)}
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:.9rem 1.6rem;margin-top:2.4rem;
+    font-size:13px;color:var(--muted);align-items:center;
+  }
+  .dot{
+    width:6px;height:6px;border-radius:50%;background:#3f8f5e;display:inline-block;
+    margin-right:.45rem;box-shadow:0 0 0 3px rgba(63,143,94,.16);
+    animation:pulse 3.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(63,143,94,.16)}50%{box-shadow:0 0 0 6px rgba(63,143,94,.05)}}
+  .btn{
+    border:1px solid var(--ink);padding:.62rem 1.1rem;border-radius:2px;
+    font-size:12.5px;letter-spacing:.06em;cursor:pointer;background:transparent;
+    transition:background .2s,color .2s,border-color .2s;
+    font-family:inherit;color:var(--ink);line-height:1.2;
+  }
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn--ghost{border-color:var(--rule);color:var(--muted)}
+  .btn--ghost:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+
+  /* ---------- profil ---------- */
+  .lede{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:clamp(1.45rem,2.5vw,2.1rem);line-height:1.36;max-width:46ch;
+  }
+  .lede em{
+    font-style:normal;
+    background:linear-gradient(transparent 62%,rgba(168,67,42,.17) 62%);
+  }
+  .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:3rem}
+  .cols3 h3{
+    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+    margin-bottom:.7rem;font-weight:500;
+  }
+  .cols3 p{font-size:14.5px;line-height:1.72;color:var(--body)}
+
+  /* ---------- parcours ---------- */
+  .job{
+    display:grid;grid-template-columns:130px 1fr;gap:2.2rem;
+    padding:2.4rem 0;border-top:1px solid var(--rule);
+  }
+  .job:first-of-type{border-top:none;padding-top:.4rem}
+  .job .dates{
+    font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);
+    letter-spacing:.02em;line-height:1.95;padding-top:.35rem;
+  }
+  .job h3{font-size:1.3rem;font-weight:500;letter-spacing:-.01em;line-height:1.3}
+  .job .co{margin:.35rem 0 .95rem;font-size:13.5px;color:var(--accent);letter-spacing:.015em}
+  .job .co span{color:var(--muted)}
+  .job ul{list-style:none;display:grid;gap:.52rem}
+  .job li{position:relative;padding-left:1.15rem;font-size:14.6px;line-height:1.62;color:var(--body)}
+  .job li::before{content:"";position:absolute;left:0;top:.66em;width:6px;height:1px;background:var(--accent)}
+  .tag{
+    display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10.5px;
+    letter-spacing:.05em;color:var(--muted);border:1px solid var(--rule);
+    padding:.2rem .5rem;border-radius:2px;margin:.95rem .3rem 0 0;
+  }
+
+  /* ---------- expertise ---------- */
+  .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:2.2rem}
+  .skills h3{
+    font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+    margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--rule);font-weight:500;
+  }
+  .skills ul{list-style:none}
+  .skills li{
+    font-size:13.8px;padding:.32rem 0;color:var(--body);
+    display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  }
+  .skills .lvl{font-family:"JetBrains Mono",monospace;font-size:9.5px;color:#aaa39a;letter-spacing:.04em;white-space:nowrap}
+
+  /* ---------- formation ---------- */
+  .edu{display:grid;grid-template-columns:repeat(2,1fr);gap:2.6rem}
+  .edu-item{padding-left:1.2rem;border-left:1px solid var(--rule)}
+  .edu-item h3{font-size:1.06rem;font-weight:500;line-height:1.35}
+  .edu-item .meta{
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+    margin:.3rem 0 .55rem;letter-spacing:.02em;
+  }
+  .edu-item p{font-size:14px;color:var(--body);line-height:1.6}
+
+  /* ---------- note ---------- */
+  .note{
+    margin-top:2.8rem;padding-top:1.4rem;border-top:1px solid var(--rule);
+    font-size:14.5px;line-height:1.7;color:var(--body);max-width:64ch;
+  }
+  .note .tag{
+    display:inline-block;margin:0 .6rem 0 0;padding:0;border:none;
+    font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:10.5px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  }
+  .note b{font-weight:500;color:var(--ink)}
+
+  /* ---------- contact ---------- */
+  .contact{padding:6rem 0 4.5rem;border-bottom:none}
+  .contact h2{
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:clamp(2.3rem,4.8vw,3.8rem);line-height:1.02;letter-spacing:-.02em;max-width:24ch;
+  }
+  .contact-row{display:flex;flex-wrap:wrap;gap:1rem 1.6rem;margin-top:2.6rem;align-items:center}
+  .mail{
+    font-size:1.14rem;border-bottom:1px solid var(--accent);padding-bottom:2px;
+    color:var(--accent);transition:opacity .2s;
+  }
+  .mail:hover{opacity:.72}
+  footer{
+    border-top:1px solid var(--rule);padding:1.7rem 0 3rem;font-size:11.5px;
+    color:var(--muted);display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:.8rem 1rem;
+  }
+  footer a{border-bottom:1px solid var(--rule)}
+  footer a:hover{color:var(--ink);border-color:var(--accent)}
+
+  /* ---------- toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:2rem;transform:translate(-50%,150%);
+    background:var(--ink);color:var(--paper);padding:.75rem 1.2rem;border-radius:2px;
+    font-size:12.5px;letter-spacing:.04em;z-index:60;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:transform .35s var(--ease),opacity .3s ease,visibility .35s;
+    max-width:90vw;text-align:center;
+  }
+  .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+  /* ---------- apparition ---------- */
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .rv{opacity:1;transform:none;transition:none}
+    .dot{animation:none}
+    *{transition-duration:.01ms !important}
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1000px){
+    nav.main{gap:1.2rem}
+    nav.main a{font-size:10.5px;letter-spacing:.1em}
+  }
+  @media (max-width:860px){
+    .wrap,.topbar-inner{padding-left:1.4rem;padding-right:1.4rem}
+    .hero-grid{grid-template-columns:1fr;gap:2rem}
+    .portrait-fig{order:2;max-width:200px;padding-top:0}
+    .portrait{aspect-ratio:1}
+    h1{max-width:14ch}
+    .cols3,.skills,.edu{grid-template-columns:1fr;gap:1.5rem}
+    .skills{grid-template-columns:repeat(2,1fr)}
+    section{padding:3.4rem 0}
+    .job{grid-template-columns:1fr;gap:.6rem}
+    .job .dates{display:flex;gap:.6rem;padding-top:0;flex-wrap:wrap}
+    .job .dates br{display:none}
+    .job .dates .sep{display:none}
+    nav.main{display:none}
+    .contact{padding:3.6rem 0 3rem}
+  }
+  @media (max-width:420px){
+    .skills{grid-template-columns:1fr}
+    .hero-meta{gap:.8rem}
+  }
+
+  /* ---------- impression (CV papier) ---------- */
+  @media print{
+    @page{size:A4;margin:14mm 14mm}
+    body{background:#fff;font-size:10pt;line-height:1.45}
+    body::before,.topbar,.toast,.skip,.btn,.lang{display:none !important}
+    .wrap{max-width:none;padding:0}
+    section{padding:0;border:none;margin-bottom:7mm}
+    .hero{padding:0 0 5mm}
+    .hero-grid{grid-template-columns:1fr 42mm;gap:8mm}
+    h1{font-size:30pt;max-width:100%}
+    .role{font-size:10pt;margin-top:2mm}
+    .portrait{filter:grayscale(1)}
+    .job{break-inside:avoid;padding:3mm 0;grid-template-columns:26mm 1fr;gap:4mm}
+    .job li{font-size:9pt}
+    .note{page-break-inside:avoid}
+    .rv{opacity:1 !important;transform:none !important}
+    .contact{padding:0}
+    .contact h2{font-size:16pt}
+    footer{margin-top:5mm;font-size:8pt}
+    .lede{font-size:12pt}
+  }
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
+</head>
+<body>
+
+<a class="skip" href="#contenu" data-key="divers.skip">{{divers.skip}}</a>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand">Léo <em>Burette</em></a>
+    <div class="nav-right">
+      <nav class="main" aria-label="{{!meta.navAria.fr}}" data-en-aria="{{!meta.navAria.en}}">
+        <a href="#profil" data-key="nav.profile">{{nav.profile}}</a>
+        <a href="#parcours" data-key="nav.career">{{nav.career}}</a>
+        <a href="#expertise">Expertise</a>
+        <a href="#formation" data-key="nav.education">{{nav.education}}</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr" aria-pressed="true" lang="fr">FR</button>
+        <span class="sep" aria-hidden="true">/</span>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" id="prog" role="presentation"></div>
+</div>
+
+<main id="contenu">
+
+  <!-- ==================== BANNIÈRE ==================== -->
+  <header class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow" data-key="hero.eyebrow">{{hero.eyebrow}}</p>
+        <h1 data-key="hero.title">{{hero.title}}</h1>
+        <p class="role" data-key="hero.lead">{{hero.lead}}</p>
+        <div class="hero-meta">
+          <span class="mono" style="font-size:12px" data-key="hero.status">{{hero.status}}</span>
+          <button class="btn" data-copy="leo.burette@gmail.com" type="button" data-key="hero.copyEmail">{{hero.copyEmail}}</button>
+          <a class="mono" style="font-size:12.5px" href="tel:+33667662918">+33 6 67 66 29 18</a>
+        </div>
+      </div>
+      <figure class="portrait-fig">
+        <!-- PORTRAIT : déposer ici la photo haute définition -->
+        <img class="portrait" src="static/pp.jpg" width="1275" height="1594" alt="{{!meta.portraitAlt.fr}}" data-en-alt="{{!meta.portraitAlt.en}}">
+      </figure>
+    </div>
+  </header>
+
+  <!-- ===================== PROFIL ===================== -->
+  <section id="profil">
+    <div class="wrap">
+      <p class="eyebrow rv" data-key="profil.eyebrow">{{profil.eyebrow}}</p>
+      <p class="lede rv" data-key="profil.lead">{{profil.lead}}</p>
+      <div class="cols3 rv">
+        <div>
+          <h3 data-key="profil.whatTitle">{{profil.whatTitle}}</h3>
+          <p data-key="profil.whatText">{{profil.whatText}}</p>
+        </div>
+        <div>
+          <h3 data-key="profil.howTitle">{{profil.howTitle}}</h3>
+          <p data-key="profil.howText">{{profil.howText}}</p>
+        </div>
+        <div>
+          <h3 data-key="profil.langTitle">{{profil.langTitle}}</h3>
+          <p data-key="profil.langText">{{profil.langText}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARCOURS ===================== -->
+  <section id="parcours">
+    <div class="wrap">
+      <p class="eyebrow rv" data-key="parcours.eyebrow">{{parcours.eyebrow}}</p>
+
+      <article class="job rv">
+        <div class="dates" data-key="parcours.sii.dates">{{parcours.sii.dates}}</div>
+        <div>
+          <h3 data-key="parcours.sii.title">{{parcours.sii.title}}</h3>
+          <p class="co" data-key="parcours.sii.company">{{parcours.sii.company}}</p>
+          <ul>
+            <li data-key="parcours.sii.bullet1">{{parcours.sii.bullet1}}</li>
+            <li data-key="parcours.sii.bullet2">{{parcours.sii.bullet2}}</li>
+            <li data-key="parcours.sii.bullet3">{{parcours.sii.bullet3}}</li>
+            <li data-key="parcours.sii.bullet4">{{parcours.sii.bullet4}}</li>
+            <li data-key="parcours.sii.bullet5">{{parcours.sii.bullet5}}</li>
+          </ul>
+          <span class="tag" data-key="parcours.sii.tag1">{{parcours.sii.tag1}}</span><span class="tag" data-key="parcours.sii.tag2">{{parcours.sii.tag2}}</span><span class="tag" data-key="parcours.sii.tag3">{{parcours.sii.tag3}}</span><span class="tag" data-key="parcours.sii.tag4">{{parcours.sii.tag4}}</span><span class="tag" data-key="parcours.sii.tag5">{{parcours.sii.tag5}}</span>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="dates" data-key="parcours.qc1.dates">{{parcours.qc1.dates}}</div>
+        <div>
+          <h3 data-key="parcours.qc1.title">{{parcours.qc1.title}}</h3>
+          <p class="co" data-key="parcours.qc1.company">{{parcours.qc1.company}}</p>
+          <ul>
+            <li data-key="parcours.qc1.bullet1">{{parcours.qc1.bullet1}}</li>
+            <li data-key="parcours.qc1.bullet2">{{parcours.qc1.bullet2}}</li>
+            <li data-key="parcours.qc1.bullet3">{{parcours.qc1.bullet3}}</li>
+            <li data-key="parcours.qc1.bullet4">{{parcours.qc1.bullet4}}</li>
+            <li data-key="parcours.qc1.bullet5">{{parcours.qc1.bullet5}}</li>
+          </ul>
+          <span class="tag" data-key="parcours.qc1.tag1">{{parcours.qc1.tag1}}</span><span class="tag" data-key="parcours.qc1.tag2">{{parcours.qc1.tag2}}</span><span class="tag" data-key="parcours.qc1.tag3">{{parcours.qc1.tag3}}</span><span class="tag" data-key="parcours.qc1.tag4">{{parcours.qc1.tag4}}</span>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="dates" data-key="parcours.qc2.dates">{{parcours.qc2.dates}}</div>
+        <div>
+          <h3 data-key="parcours.qc2.title">{{parcours.qc2.title}}</h3>
+          <p class="co" data-key="parcours.qc2.company">{{parcours.qc2.company}}</p>
+          <ul>
+            <li data-key="parcours.qc2.bullet1">{{parcours.qc2.bullet1}}</li>
+            <li data-key="parcours.qc2.bullet2">{{parcours.qc2.bullet2}}</li>
+            <li data-key="parcours.qc2.bullet3">{{parcours.qc2.bullet3}}</li>
+          </ul>
+          <span class="tag" data-key="parcours.qc2.tag1">{{parcours.qc2.tag1}}</span><span class="tag" data-key="parcours.qc2.tag2">{{parcours.qc2.tag2}}</span><span class="tag" data-key="parcours.qc2.tag3">{{parcours.qc2.tag3}}</span>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="dates">2021</div>
+        <div>
+          <h3 data-key="parcours.qc3.title">{{parcours.qc3.title}}</h3>
+          <p class="co" data-key="parcours.qc3.company">{{parcours.qc3.company}}</p>
+          <ul>
+            <li data-key="parcours.qc3.bullet1">{{parcours.qc3.bullet1}}</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="job rv">
+        <div class="dates">2019</div>
+        <div>
+          <h3 data-key="parcours.iusti.title">{{parcours.iusti.title}}</h3>
+          <p class="co" data-key="parcours.iusti.company">{{parcours.iusti.company}}</p>
+          <ul>
+            <li data-key="parcours.iusti.bullet1">{{parcours.iusti.bullet1}}</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERTISE ===================== -->
+  <section id="expertise">
+    <div class="wrap">
+      <p class="eyebrow rv" data-key="expertise.eyebrow">{{expertise.eyebrow}}</p>
+      <div class="skills rv">
+        <div>
+          <h3 data-key="expertise.langTitle">{{expertise.langTitle}}</h3>
+          <ul>
+            <li><span>C++</span></li>
+            <li><span>Go</span></li>
+            <li><span>C</span></li>
+            <li><span>Java</span></li>
+            <li><span>JavaScript</span></li>
+            <li><span>Racket</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Infrastructure</h3>
+          <ul>
+            <li><span>Docker</span></li>
+            <li><span>Kubernetes</span></li>
+            <li><span>Google Cloud</span></li>
+            <li><span>Git</span></li>
+            <li><span>Maven</span></li>
+            <li><span>Linux / macOS</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Frameworks</h3>
+          <ul>
+            <li><span>Qt / QML</span></li>
+            <li><span>Spring</span></li>
+            <li><span>Node.js</span></li>
+          </ul>
+          <h3 style="margin-top:1.6rem" data-key="expertise.softTitle">{{expertise.softTitle}}</h3>
+          <ul>
+            <li><span data-key="expertise.soft.adaptability">{{expertise.soft.adaptability}}</span></li>
+            <li><span>Communication</span></li>
+            <li><span data-key="expertise.soft.organisation">{{expertise.soft.organisation}}</span></li>
+            <li><span data-key="expertise.soft.initiative">{{expertise.soft.initiative}}</span></li>
+            <li><span data-key="expertise.soft.professionalism">{{expertise.soft.professionalism}}</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-key="expertise.continuingTitle">{{expertise.continuingTitle}}</h3>
+          <ul>
+            <li><span>Deep Learning</span><span class="lvl" data-key="expertise.issuer.cnam">{{expertise.issuer.cnam}}</span></li>
+            <li><span>Kubernetes</span><span class="lvl" data-key="expertise.issuer.orsys">{{expertise.issuer.orsys}}</span></li>
+          </ul>
+          <h3 style="margin-top:1.6rem" data-key="expertise.groundTitle">{{expertise.groundTitle}}</h3>
+          <ul>
+            <li><span data-key="expertise.ground.conferences">{{expertise.ground.conferences}}</span></li>
+            <li><span>Sprint Planning</span></li>
+            <li><span data-key="expertise.ground.client">{{expertise.ground.client}}</span></li>
+            <li><span data-key="expertise.ground.recruitment">{{expertise.ground.recruitment}}</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="note rv" data-key="expertise.note">{{expertise.note}}</p>
+    </div>
+  </section>
+
+  <!-- ===================== FORMATION ===================== -->
+  <section id="formation">
+    <div class="wrap">
+      <p class="eyebrow rv" data-key="formation.eyebrow">{{formation.eyebrow}}</p>
+      <div class="edu rv">
+        <div class="edu-item">
+          <h3 data-key="formation.niceTitle">{{formation.niceTitle}}</h3>
+          <p class="meta">Polytech Nice Sophia · 2019 — 2022</p>
+          <p data-key="formation.niceText">{{formation.niceText}}</p>
+        </div>
+        <div class="edu-item">
+          <h3 data-key="formation.peipTitle">{{formation.peipTitle}}</h3>
+          <p class="meta">Polytech Marseille · 2019</p>
+          <p data-key="formation.peipText">{{formation.peipText}}</p>
+        </div>
+        <div class="edu-item">
+          <h3 data-key="formation.sportTitle">{{formation.sportTitle}}</h3>
+          <p class="meta">Polytech Marseille · 2019 — 2022</p>
+          <p data-key="formation.sportText">{{formation.sportText}}</p>
+        </div>
+        <div class="edu-item">
+          <h3 data-key="formation.moreTitle">{{formation.moreTitle}}</h3>
+          <p class="meta">CNAM · ORSYS</p>
+          <p data-key="formation.moreText">{{formation.moreText}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow rv" data-key="contact.eyebrow">{{contact.eyebrow}}</p>
+      <h2 class="rv" data-key="contact.title">{{contact.title}}</h2>
+      <div class="contact-row rv">
+        <a class="mail" href="mailto:leo.burette@gmail.com">leo.burette@gmail.com</a>
+        <button class="btn" data-copy="leo.burette@gmail.com" type="button" data-key="contact.copy">{{contact.copy}}</button>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/leo-burette/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span class="mono" style="font-size:12.5px;color:var(--muted)">+33 6 67 66 29 18 · 06600 Antibes</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="wrap" style="border-top:1px solid var(--rule)">
+  <footer>
+    <span>© <span id="yr">2026</span> Léo Burette — <span data-key="footer.role">{{footer.role}}</span></span>
+    <span style="display:flex;gap:1.4rem;flex-wrap:wrap">
+      <a href="mailto:leo.burette@gmail.com" data-key="footer.email">{{footer.email}}</a>
+      <a href="https://www.linkedin.com/in/leo-burette/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="#" id="printlink" data-key="footer.print">{{footer.print}}</a>
+    </span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">{{!meta.toast.fr}}</div>
+
+<script>
+/* --- bascule FR/EN ---------------------------------------------------------
+   Le français est la source ; chaque nœud traduit porte un attribut data-en
+   (innerHTML), data-en-alt (alt) ou data-en-aria (aria-label). Le choix est
+   mémorisé et reflété dans l'attribut lang du document. */
+(function(){
+  "use strict";
+  var META = {
+    fr: {lang:"fr", title:"{{!meta.title.fr}}",
+         desc:"{{!meta.description.fr}}",
+         copied:"{{!meta.copiedSuffix.fr}}", copyFail:"{{!meta.copyFailPrefix.fr}}"},
+    en: {lang:"en", title:"{{!meta.title.en}}",
+         desc:"{{!meta.description.en}}",
+         copied:"{{!meta.copiedSuffix.en}}", copyFail:"{{!meta.copyFailPrefix.en}}"}
+  };
+  var nodes = [].slice.call(document.querySelectorAll("[data-en]"));
+  var alts = [].slice.call(document.querySelectorAll("[data-en-alt]"));
+  var arias = [].slice.call(document.querySelectorAll("[data-en-aria]"));
+  var buttons = [].slice.call(document.querySelectorAll(".lang button"));
+  var desc = document.querySelector('meta[name="description"]');
+  var current = "fr";
+
+  nodes.forEach(function(n){ n.dataset.fr = n.innerHTML; });
+  alts.forEach(function(n){ n.dataset.frAlt = n.getAttribute("alt"); });
+  arias.forEach(function(n){ n.dataset.frAria = n.getAttribute("aria-label"); });
+
+  function apply(lang){
+    var m = META[lang] || META.fr;
+    nodes.forEach(function(n){ n.innerHTML = lang === "en" ? n.dataset.en : n.dataset.fr; });
+    alts.forEach(function(n){ n.setAttribute("alt", lang === "en" ? n.dataset.enAlt : n.dataset.frAlt); });
+    arias.forEach(function(n){ n.setAttribute("aria-label", lang === "en" ? n.dataset.enAria : n.dataset.frAria); });
+    document.documentElement.lang = m.lang;
+    document.title = m.title;
+    if (desc) desc.setAttribute("content", m.desc);
+    buttons.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+    current = lang;
+    try { localStorage.setItem("cv-lang", lang); } catch (e) {}
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){ apply(b.dataset.lang); });
+  });
+
+  var stored = null;
+  try { stored = localStorage.getItem("cv-lang"); } catch (e) {}
+  var asked = (location.search.match(/[?&]lang=(fr|en)/) || [])[1];
+  if (asked || stored === "en" || stored === "fr") apply(asked || stored);
+
+  window.CV = {lang: function(){ return current; }, copied: function(){ return META[current].copied; },
+               copyFail: function(){ return META[current].copyFail; }};
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  document.getElementById("printlink").addEventListener("click", function(e){
+    e.preventDefault(); window.print();
+  });
+
+  // --- copie de l'e-mail ---
+  var toast = document.getElementById("toast"), tTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(tTimer);
+    tTimer = setTimeout(function(){ toast.classList.remove("show"); }, 2400);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function(btn){
+    btn.addEventListener("click", function(){
+      var txt = btn.getAttribute("data-copy");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function(){ showToast(txt + window.CV.copied()); },
+                                                 function(){ showToast(txt); });
+      } else { showToast(window.CV.copyFail() + txt); }
+    });
+  });
+
+  // --- barre de progression ---
+  var prog = document.getElementById("prog");
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  // --- navigation : section active ---
+  var links = Array.prototype.slice.call(document.querySelectorAll("nav.main a"));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  if ("IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var i = targets.indexOf(e.target);
+        links.forEach(function(l){ l.removeAttribute("aria-current"); });
+        if (i > -1) links[i].setAttribute("aria-current", "true");
+      });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    targets.forEach(function(t){ if (t) spy.observe(t); });
+
+    // --- apparition au scroll ---
+    if (!reduced) {
+      var rev = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); }
+        });
+      }, {threshold:0.12});
+      Array.prototype.forEach.call(document.querySelectorAll(".rv"), function(el){ rev.observe(el); });
+    } else {
+      Array.prototype.forEach.call(document.querySelectorAll(".rv"), function(el){ el.classList.add("in"); });
+    }
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll(".rv"), function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Léo Burette",
+  "jobTitle": "Ingénieur informatique — Architecte logiciel",
+  "email": "mailto:leo.burette@gmail.com",
+  "telephone": "+33667662918",
+  "url": "https://leoburette.github.io/",
+  "image": "https://leoburette.github.io/static/pp.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "06600",
+    "addressLocality": "Antibes",
+    "addressCountry": "FR"
+  },
+  "knowsLanguage": ["fr", "en"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Polytech Nice Sophia"
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "SII (pour Airbus Defence and Space)"
+  },
+  "knowsAbout": ["Architecture logicielle", "C++", "Qt", "Go", "Kubernetes", "Micro-services", "Cloud natif"],
+  "sameAs": ["https://www.linkedin.com/in/leo-burette/"]
+}
+</script>
+</body>
+</html>

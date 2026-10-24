@@ -1,0 +1,426 @@
+{
+  "divers": {
+    "skip": {
+      "fr": "Aller au contenu",
+      "en": "Skip to content"
+    }
+  },
+  "nav": {
+    "profile": {
+      "fr": "Profil",
+      "en": "Profile"
+    },
+    "career": {
+      "fr": "Parcours",
+      "en": "Career"
+    },
+    "education": {
+      "fr": "Formation",
+      "en": "Education"
+    }
+  },
+  "hero": {
+    "eyebrow": {
+      "fr": "Ingénieur informatique — Antibes, France",
+      "en": "Software engineer — Antibes, France"
+    },
+    "title": {
+      "fr": "Développeur par métier, <span class=\"accent\">polyvalent par nature.</span>",
+      "en": "Developer by trade, <span class=\"accent\">versatile by nature.</span>"
+    },
+    "lead": {
+      "fr": "J'aime intervenir sur tous les aspects d'un projet, du <b>concept produit à la production</b> en associant expertise technique et compréhension des enjeux métier",
+      "en": "I like contributing across all stages of a project, from <b>product concept to production</b>, combining technical expertise with an understanding of business challenges."
+    },
+    "status": {
+      "fr": "<span class=\"dot\"></span>Ouvert aux échanges",
+      "en": "<span class=\"dot\"></span>Open to a conversation"
+    },
+    "copyEmail": {
+      "fr": "Copier l’e-mail",
+      "en": "Copy email"
+    }
+  },
+  "profil": {
+    "eyebrow": {
+      "fr": "01 — Profil",
+      "en": "01 — Profile"
+    },
+    "lead": {
+      "fr": "Ouvert d’esprit et <em>capable de m’adapter</em> à tous types de situations, de technologies et d’organisations. Du calcul thermodynamique en Fortran au cloud natif pour l’imagerie satellite.",
+      "en": "Open-minded and <em>able to adapt</em> to any kind of situation, technology or organisation. From thermodynamic computation in Fortran to cloud-native satellite imaging."
+    },
+    "whatTitle": {
+      "fr": "Ce que je fais techniquement",
+      "en": "My technical activities"
+    },
+    "whatText": {
+      "fr": "Architecture de solutions et choix techniques, développement d’applications cloud et lourdes, rédaction de la documentation et des spécifications.",
+      "en": "Solution architecture and technology choices, development of cloud and heavy applications, writing documentation and specifications."
+    },
+    "howTitle": {
+      "fr": "Comment j'interviens",
+      "en": "How I contribute"
+    },
+    "howText": {
+      "fr": "Animation de Sprint Planning, participation au product meeting avec les équipes marketings & sales, interface entre donneurs d’ordre et équipes, appui au recrutement et à la gestion de projet.",
+      "en": "Running Sprint Planning, participation in product meetings with marketing & sales teams, bridging clients and teams, supporting recruitment and project management."
+    },
+    "langTitle": {
+      "fr": "Langues",
+      "en": "Languages"
+    },
+    "langText": {
+      "fr": "Français natif. Anglais professionnel, pratiqué au quotidien chez Quantificare.",
+      "en": "Native French. Professional English, used daily at Quantificare."
+    }
+  },
+  "parcours": {
+    "eyebrow": {
+      "fr": "02 — Parcours professionnel",
+      "en": "02 — Career"
+    },
+    "sii": {
+      "dates": {
+        "fr": "2024 —<br>aujourd’hui",
+        "en": "2024 —<br>present"
+      },
+      "title": {
+        "fr": "Ingénieur informatique",
+        "en": "Software engineer"
+      },
+      "company": {
+        "fr": "SII · Airbus Defence and Space <span>— Sophia Antipolis · CDI</span>",
+        "en": "SII · Airbus Defence and Space <span>— Sophia Antipolis · Permanent contract</span>"
+      },
+      "bullet1": {
+        "fr": "Développement de solutions cloud pour le traitement d’images satellites, en environnement cloud natif (Go, Kubernetes, K9s, Google Cloud).",
+        "en": "Cloud solutions for satellite image processing in a cloud-native environment (Go, Kubernetes, K9s, Google Cloud)."
+      },
+      "bullet2": {
+        "fr": "Rédaction de la documentation technique et des bons de livraison.",
+        "en": "Technical documentation and delivery notes."
+      },
+      "bullet3": {
+        "fr": "SPOC entre Airbus D&amp;S et SII : circulation de l’information entre les deux entités, participation aux recrutements, appui au chef de projet.",
+        "en": "SPOC between Airbus D&S and SII: information flow between both entities, involvement in recruitment, support to the project manager."
+      },
+      "bullet4": {
+        "fr": "Reprise de tâches de la DO : capacitaire et points de synchronisation SII ↔ Airbus.",
+        "en": "Taking over back-office tasks: capacity management and SII ↔ Airbus synchronisation meetings."
+      },
+      "bullet5": {
+        "fr": "Usage quotidien de Gemini CLI en mode agentique.",
+        "en": "Daily use of Gemini CLI in agentic mode."
+      },
+      "tag1": {
+        "fr": "Go",
+        "en": "Go"
+      },
+      "tag2": {
+        "fr": "Kubernetes",
+        "en": "Kubernetes"
+      },
+      "tag3": {
+        "fr": "K9s",
+        "en": "K9s"
+      },
+      "tag4": {
+        "fr": "Google Cloud",
+        "en": "Google Cloud"
+      },
+      "tag5": {
+        "fr": "IA agentique",
+        "en": "Agentic AI"
+      }
+    },
+    "qc1": {
+      "dates": {
+        "fr": "2022 —<br>2024",
+        "en": "2022 —<br>2024"
+      },
+      "title": {
+        "fr": "Architecte logiciel",
+        "en": "Software architect"
+      },
+      "company": {
+        "fr": "QuantifiCare <span>— Sophia Antipolis · CDI</span>",
+        "en": "QuantifiCare <span>— Sophia Antipolis · Permanent contract</span>"
+      },
+      "bullet1": {
+        "fr": "Architecture des différentes solutions informatiques de l’entreprise et choix des technologies répondant aux besoins clients et opérationnels.",
+        "en": "Architecture of the company’s various IT solutions and selection of technologies matching client and operational needs."
+      },
+      "bullet2": {
+        "fr": "Développement d’une application lourde en C++ / Qt&nbsp;QML.",
+        "en": "Development of a heavy C++ / Qt QML application."
+      },
+      "bullet3": {
+        "fr": "Rédaction de la documentation et des spécifications techniques.",
+        "en": "Documentation and technical specifications."
+      },
+      "bullet4": {
+        "fr": "Organisation des infrastructures informatiques lors des congrès internationaux, en lien avec l’IT et le Marketing &amp; Sales.",
+        "en": "IT infrastructure for international conferences, together with IT, Marketing & Sales teams."
+      },
+      "bullet5": {
+        "fr": "Participation aux réunions produits et animation des Sprint Planning d’une équipe de 10 personnes.",
+        "en": "Product meetings and facilitation of Sprint Planning for a team of 10."
+      },
+      "tag1": {
+        "fr": "C++",
+        "en": "C++"
+      },
+      "tag2": {
+        "fr": "Qt/QML",
+        "en": "Qt/QML"
+      },
+      "tag3": {
+        "fr": "Architecture",
+        "en": "Architecture"
+      },
+      "tag4": {
+        "fr": "Product meeting",
+        "en": "Product meeting"
+      }
+    },
+    "qc2": {
+      "dates": {
+        "fr": "2021 —<br>2022",
+        "en": "2021 —<br>2022"
+      },
+      "title": {
+        "fr": "Apprenti architecte logiciel",
+        "en": "Apprentice software architect"
+      },
+      "company": {
+        "fr": "QuantifiCare <span>— Sophia Antipolis · Alternance</span>",
+        "en": "QuantifiCare <span>— Sophia Antipolis · Apprenticeship</span>"
+      },
+      "bullet1": {
+        "fr": "Architecture d’une solution de stockage d’images destinée à améliorer l’apprentissage automatisé.",
+        "en": "Architecture of an image storage solution aimed at improving machine learning."
+      },
+      "bullet2": {
+        "fr": "Développement et architecture d’une solution micro-services.",
+        "en": "Development and architecture of a micro-services solution."
+      },
+      "bullet3": {
+        "fr": "Gestion de projet et organisation d’un consortium lauréat d’un appel d’offres.",
+        "en": "Project management and organisation of a consortium that won a call for tenders."
+      },
+      "tag1": {
+        "fr": "Micro-services",
+        "en": "Micro-services"
+      },
+      "tag2": {
+        "fr": "Apprentissage automatique",
+        "en": "Machine learning"
+      },
+      "tag3": {
+        "fr": "Gestion de projet",
+        "en": "Project management"
+      }
+    },
+    "qc3": {
+      "title": {
+        "fr": "Stagiaire en développement logiciel",
+        "en": "Software development intern"
+      },
+      "company": {
+        "fr": "QuantifiCare <span>— Sophia Antipolis · Stage</span>",
+        "en": "QuantifiCare <span>— Sophia Antipolis · Internship</span>"
+      },
+      "bullet1": {
+        "fr": "Amélioration du rendu 3D de l’application : recherche de l’état de l’art et développement.",
+        "en": "Improved the application’s 3D rendering: state-of-the-art research and development."
+      }
+    },
+    "iusti": {
+      "title": {
+        "fr": "Stagiaire en développement logiciel",
+        "en": "Software development intern"
+      },
+      "company": {
+        "fr": "IUSTI <span>— Institut universitaire des systèmes thermiques industriels, Marseille · Stage</span>",
+        "en": "IUSTI <span>— University Institute of Industrial Thermal Systems, Marseille · Internship</span>"
+      },
+      "bullet1": {
+        "fr": "Élaboration d’un outil de calcul thermodynamique en Fortran.",
+        "en": "Built a thermodynamic calculation tool in Fortran."
+      }
+    }
+  },
+  "expertise": {
+    "eyebrow": {
+      "fr": "03 — Expertise technique",
+      "en": "03 — Technical expertise"
+    },
+    "langTitle": {
+      "fr": "Langages",
+      "en": "Languages"
+    },
+    "softTitle": {
+      "fr": "Savoir-être",
+      "en": "Soft skills"
+    },
+    "soft": {
+      "adaptability": {
+        "fr": "Adaptabilité",
+        "en": "Adaptability"
+      },
+      "organisation": {
+        "fr": "Organisation",
+        "en": "Organisation"
+      },
+      "initiative": {
+        "fr": "Prise d’initiative",
+        "en": "Initiative"
+      },
+      "professionalism": {
+        "fr": "Professionnalisme",
+        "en": "Professionalism"
+      }
+    },
+    "continuingTitle": {
+      "fr": "Formation continue",
+      "en": "Continuing education"
+    },
+    "groundTitle": {
+      "fr": "Terrain",
+      "en": "On the field"
+    },
+    "ground": {
+      "conferences": {
+        "fr": "Congrès internationaux",
+        "en": "International conferences"
+      },
+      "client": {
+        "fr": "Interface client",
+        "en": "Client liaison"
+      },
+      "recruitment": {
+        "fr": "Recrutement",
+        "en": "Recruitment"
+      }
+    },
+    "note": {
+      "fr": "<span class=\"tag\">IA au quotidien</span>À titre personnel, je travaille chaque jour avec <b>Hermes</b>, <b>DeepSeek</b> et <b>Gemini</b> — agents autonomes, CLI en mode agentique et modèles de langage au service du développement.",
+      "en": "<span class=\"tag\">AI every day</span>In my free time, I work every day with <b>Hermes</b>, <b>DeepSeek</b> and <b>Gemini</b> — autonomous agents, agentic CLI workflows and language models in the service of development."
+    },
+    "issuer": {
+      "cnam": {
+        "fr": "CNAM",
+        "en": "CNAM"
+      },
+      "orsys": {
+        "fr": "ORSYS",
+        "en": "ORSYS"
+      }
+    }
+  },
+  "formation": {
+    "eyebrow": {
+      "fr": "04 — Formation",
+      "en": "04 — Education"
+    },
+    "niceTitle": {
+      "fr": "Diplôme d’ingénieur en sciences informatiques",
+      "en": "Engineering degree in computer science"
+    },
+    "niceText": {
+      "fr": "Spécialité architecture logicielle. Programmation objet, fonctionnelle et impérative.",
+      "en": "Software architecture specialisation. Object-oriented, functional and imperative programming."
+    },
+    "peipTitle": {
+      "fr": "Cycle préparatoire intégré (PEIP)",
+      "en": "Integrated preparatory cycle (PEIP)"
+    },
+    "peipText": {
+      "fr": "Mathématiques, physique et informatique.",
+      "en": "Mathematics, physics and computer science."
+    },
+    "sportTitle": {
+      "fr": "Bureau des sports",
+      "en": "Sports association"
+    },
+    "sportText": {
+      "fr": "Engagement associatif : organisation d’événements sportifs inter-écoles.",
+      "en": "Student society work: organising inter-school sports events."
+    },
+    "moreTitle": {
+      "fr": "Formations complémentaires",
+      "en": "Further training"
+    },
+    "moreText": {
+      "fr": "MOOC Deep Learning (CNAM) et formation Implementing Kubernetes (ORSYS).",
+      "en": "Deep Learning MOOC (CNAM) and Implementing Kubernetes training (ORSYS)."
+    }
+  },
+  "contact": {
+    "eyebrow": {
+      "fr": "05 — Contact",
+      "en": "05 — Contact"
+    },
+    "title": {
+      "fr": "Ravi d’échanger avec vous sur mon profil.",
+      "en": "Glad to talk with you about my profile."
+    },
+    "copy": {
+      "fr": "Copier",
+      "en": "Copy"
+    }
+  },
+  "footer": {
+    "role": {
+      "fr": "Ingénieur informatique, architecte logiciel",
+      "en": "Software engineer, software architect"
+    },
+    "email": {
+      "fr": "E-mail",
+      "en": "Email"
+    },
+    "print": {
+      "fr": "Imprimer",
+      "en": "Print"
+    }
+  },
+  "meta": {
+    "title": {
+      "fr": "Léo Burette — Ingénieur informatique, architecte logiciel | Antibes",
+      "en": "Léo Burette — Software engineer, software architect | Antibes"
+    },
+    "titleShort": {
+      "fr": "Léo Burette — Ingénieur informatique, architecte logiciel",
+      "en": "Léo Burette — Software engineer, software architect"
+    },
+    "description": {
+      "fr": "Léo Burette, ingénieur informatique et architecte logiciel à Antibes. Sept ans d’expérience en C++/Qt, micro-services et cloud natif (Go, Kubernetes) chez QuantifiCare et SII pour Airbus Defence and Space.",
+      "en": "Léo Burette, software engineer and software architect in Antibes. Seven years of experience in C++/Qt, micro-services and cloud-native systems (Go, Kubernetes) at QuantifiCare and SII for Airbus Defence and Space."
+    },
+    "portraitAlt": {
+      "fr": "Portrait de Léo Burette",
+      "en": "Portrait of Léo Burette"
+    },
+    "navAria": {
+      "fr": "Navigation principale",
+      "en": "Main navigation"
+    },
+    "toast": {
+      "fr": "E-mail copié",
+      "en": "Email copied"
+    },
+    "copiedSuffix": {
+      "fr": " copié",
+      "en": " copied"
+    },
+    "copyFailPrefix": {
+      "fr": "Copier l'e-mail : ",
+      "en": "Copy email: "
+    },
+    "ogDescription": {
+      "fr": "Architecture logicielle, C++/Qt, micro-services et cloud natif (Go, Kubernetes). Basé à Antibes.",
+      "en": "Software architecture, C++/Qt, micro-services and cloud-native systems (Go, Kubernetes). Based in Antibes."
+    }
+  }
+}
