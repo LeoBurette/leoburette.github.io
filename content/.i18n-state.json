@@ -438,6 +438,12 @@
    "frlen": 5,
    "enlen": 5
   },
+  "expertise.issuer.sii": {
+   "fr": "31c5915fd1423581b45cb43e0c6d9d79d0ed70ea",
+   "en": "31c5915fd1423581b45cb43e0c6d9d79d0ed70ea",
+   "frlen": 3,
+   "enlen": 3
+  },
   "formation.eyebrow": {
    "fr": "58fc4258d7292e91b74509742aded42d02a5b3f2",
    "en": "81622fe08eda1b422038ed1e7ec3abe40ff4b387",

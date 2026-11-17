@@ -316,6 +316,10 @@
       "orsys": {
         "fr": "ORSYS",
         "en": "ORSYS"
+      },
+      "sii": {
+        "fr": "SII",
+        "en": "SII"
       }
     }
   },
