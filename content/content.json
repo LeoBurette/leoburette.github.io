@@ -286,6 +286,12 @@
       "fr": "Formation continue",
       "en": "Continuing education"
     },
+    "cont": {
+      "sii": {
+        "fr": "Parcours IA",
+        "en": "AI training"
+      }
+    },
     "groundTitle": {
       "fr": "Terrain",
       "en": "On the field"
@@ -320,6 +326,10 @@
       "sii": {
         "fr": "SII",
         "en": "SII"
+      },
+      "anthropic": {
+        "fr": "Anthropic",
+        "en": "Anthropic"
       }
     }
   },
@@ -357,8 +367,8 @@
       "en": "Further training"
     },
     "moreText": {
-      "fr": "MOOC Deep Learning (CNAM) et formation Implementing Kubernetes (ORSYS).",
-      "en": "Deep Learning MOOC (CNAM) and Implementing Kubernetes training (ORSYS)."
+      "fr": "MOOC Deep Learning (CNAM), formation Implementing Kubernetes (ORSYS), Parcours IA (SII) et Claude Code in Action (Anthropic).",
+      "en": "Deep Learning MOOC (CNAM), Implementing Kubernetes training (ORSYS), AI training (SII) and Claude Code in Action (Anthropic)."
     }
   },
   "contact": {

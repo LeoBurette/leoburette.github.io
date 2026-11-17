@@ -396,6 +396,12 @@
    "frlen": 18,
    "enlen": 20
   },
+  "expertise.cont.sii": {
+   "fr": "d889fec3d1e35b3a9edd12fc591f9fb0c858f3a9",
+   "en": "65e8cff235927968808bf04ae2383137a24183a4",
+   "frlen": 11,
+   "enlen": 11
+  },
   "expertise.groundTitle": {
    "fr": "e7d721bc9ae7b128f19dab520b601060c798771c",
    "en": "df13aff1c2b7886932835e5f8df522de6e44e386",
@@ -443,6 +449,12 @@
    "en": "31c5915fd1423581b45cb43e0c6d9d79d0ed70ea",
    "frlen": 3,
    "enlen": 3
+  },
+  "expertise.issuer.anthropic": {
+   "fr": "b780a23b530ef6bb5c3b722a0c9c5e3abf222e8b",
+   "en": "b780a23b530ef6bb5c3b722a0c9c5e3abf222e8b",
+   "frlen": 9,
+   "enlen": 9
   },
   "formation.eyebrow": {
    "fr": "58fc4258d7292e91b74509742aded42d02a5b3f2",
@@ -493,10 +505,10 @@
    "enlen": 16
   },
   "formation.moreText": {
-   "fr": "935eb69bbc60cd9212bed3a233d14ebd848f6aa9",
-   "en": "249c0c0ba152449ac03b663cef38749c657672bb",
-   "frlen": 71,
-   "enlen": 71
+   "fr": "d61c3dfaff7ef8549fe54f065cad89335c88b703",
+   "en": "ae5d000a9f9d4caf1e7b3a52b55b84f7760eda82",
+   "frlen": 125,
+   "enlen": 125
   },
   "contact.eyebrow": {
    "fr": "e4167c7283d88e66a7ad12c1e4eab0e20876675b",
